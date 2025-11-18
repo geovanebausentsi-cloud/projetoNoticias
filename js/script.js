@@ -1,24 +1,21 @@
-// /js/script.js
+import { NOTICIAS_MOCK } from './dados.js'; 
 
-import { NOTICIAS_MOCK } from './dados.js'; // Importa a lista de notícias (o array)
-
-// Variáveis globais para controlar o estado da aplicação
-const feedNoticias = NOTICIAS_MOCK; // 1. Estrutura de dados: A lista de notícias (Array/Lista Encadeada)
-const historicoNavegacao = []; // 3. Estrutura de dados: A pilha para o Histórico de navegação
+const feedNoticias = NOTICIAS_MOCK; //A lista de notícias (Array)
+const historicoNavegacao = []; // A pilha para o Histórico de navegação
 let indiceNoticiaAtual = 0; // Para saber qual notícia da lista estamos a ver no momento
 
 // -----------------------------------------------------
-// 1. Renderização Inicial (Onde o seu código começa)
+// 1. Renderização Inicial 
 // -----------------------------------------------------
 
-// Pega o elemento HTML onde vamos exibir as notícias
+// Pega o elemento HTML onde sera exibida as notícias
 const conteinerNoticias = document.querySelector('.conteiner2');
-// Pega o elemento principal de exibição da notícia única (vamos criar este em seguida)
+
+// Pega o elemento principal de exibição da notícia única 
 const noticiaUnicaDiv = document.createElement('div');
 noticiaUnicaDiv.classList.add('noticia-principal');
 conteinerNoticias.appendChild(noticiaUnicaDiv);
 
-// Função que 'desenha' a notícia na tela
 function renderizarNoticia(indice) {
     // Garante que o índice está dentro dos limites da lista
     if (indice < 0 || indice >= feedNoticias.length) {
@@ -55,6 +52,7 @@ function formatarData(dataISO) {
 // 2. Adicionar Botões de Navegação e Controles
 // -----------------------------------------------------
 
+// Função para criar o HTML dos botões de controle 
 // Função para criar o HTML dos botões de controle (Próxima, Anterior, Voltar, etc.)
 function criarControles() {
     const controlesHTML = `
@@ -66,7 +64,15 @@ function criarControles() {
         <hr>
         <div class="controles-gerenciamento">
             <h3>Gerenciamento da Lista (Feed)</h3>
+            
+            <div class="campos-adicionar-noticia">
+                <input type="text" id="input-titulo" placeholder="Título da Nova Notícia" style="width: 100%; margin-bottom: 10px;">
+                <input type="text" id="input-imagem-url" placeholder="URL da Imagem (opcional)" style="width: 100%; margin-bottom: 10px;">
+                <textarea id="input-conteudo" placeholder="Conteúdo completo da notícia (Corpo)" rows="3" style="width: 100%; margin-bottom: 10px;"></textarea>
+            </div>
+            
             <button id="btn-adicionar">Adicionar Nova Notícia</button>
+            
             <input type="number" id="input-remover-id" placeholder="ID para remover">
             <button id="btn-remover">Remover por ID</button>
         </div>
@@ -103,14 +109,14 @@ function atualizarListaFeed() {
 }
 
 // -----------------------------------------------------
-// 3. Funções de Navegação (Requisito 2 e 3)
+// 3. Funções de Navegação 
 // -----------------------------------------------------
 
 // Função que empilha a notícia atual antes de mudar para a nova
 function visitarNovaNoticia(novoIndice) {
     // Só empilha se a mudança não for um 'Voltar' do histórico
     if (indiceNoticiaAtual !== novoIndice) {
-        // **3. Histórico de navegação:** Empilha a notícia atual
+        //  Histórico de navegação: Empilha a notícia atual
         historicoNavegacao.push(feedNoticias[indiceNoticiaAtual].id);
     }
 
@@ -119,24 +125,24 @@ function visitarNovaNoticia(novoIndice) {
     console.log("Histórico: ", historicoNavegacao);
 }
 
-// **2. Botão Próxima:** Anda para a frente na lista (Array)
+//  Botão Próxima: Anda para a frente na lista (Array)
 function irParaProxima() {
     if (indiceNoticiaAtual < feedNoticias.length - 1) {
         visitarNovaNoticia(indiceNoticiaAtual + 1);
     }
 }
 
-// **2. Botão Anterior:** Anda para trás na lista (Array)
+//  Botão Anterior: Anda para trás na lista (Array)
 function irParaAnterior() {
     if (indiceNoticiaAtual > 0) {
         visitarNovaNoticia(indiceNoticiaAtual - 1);
     }
 }
 
-// **3. Botão Voltar:** Desempilha do Histórico
+//  Botão Voltar: Desempilha do Histórico
 function voltarHistorico() {
     if (historicoNavegacao.length > 0) {
-        // **3. Histórico de navegação:** Desempilha a última notícia vista
+        //  Histórico de navegação: Desempilha a última notícia vista
         const idUltimaNoticia = historicoNavegacao.pop(); 
         
         // Encontra o índice dessa notícia no feed
@@ -155,28 +161,57 @@ function voltarHistorico() {
 }
 
 // -----------------------------------------------------
-// 4. Funções de Gerenciamento da Lista (Requisito 4)
+//  Funções de Gerenciamento da Lista 
 // -----------------------------------------------------
-
-// **4. Adicionar nova notícia** (ao final da lista)
+//  Adicionar nova notícia** (ao final da lista)
 function adicionarNoticia() {
-    // Cria uma notícia de teste
+    // 1. Pega os valores digitados pelo usuário
+    const novoTitulo = document.getElementById('input-titulo').value.trim();
+    const novoConteudo = document.getElementById('input-conteudo').value.trim();
+    // NOVO: Pega a URL da imagem digitada
+    const novaImagemUrl = document.getElementById('input-imagem-url').value.trim();
+
+    // 2. Validação simples
+    if (!novoTitulo || !novoConteudo) {
+        alert("Por favor, preencha o Título e o Conteúdo da notícia.");
+        return;
+    }
+    
+    // 3. Define a URL final da imagem: usa a URL digitada, ou a placeholder padrão se o campo estiver vazio
+    const imagemFinal = novaImagemUrl.length > 0 
+        ? novaImagemUrl 
+        : "https://via.placeholder.com/600x400?text=Sua+Nova+Noticia";
+
+    // --- LÓGICA PARA ID SEQUENCIAL ---
+    const idsAtuais = feedNoticias.map(noticia => noticia.id);
+    const maxId = idsAtuais.length > 0 ? Math.max(...idsAtuais) : 0;
+    const proximoId = maxId + 1;
+    // --- FIM DA LÓGICA DE ID SEQUENCIAL ---
+    
+    // 4. Cria o objeto da nova notícia
     const novaNoticia = {
-        "id": Date.now(), // Usa o timestamp como ID único
-        "titulo": "Nova Notícia Adicionada por Você!",
-        "imagem_url": "https://via.placeholder.com/600x400?text=Nova+Noticia",
-        "descricao_curta": "Esta é uma notícia de teste que você acabou de inserir na lista.",
-        "conteudo_completo": "Parabéns, a funcionalidade de adição está a funcionar corretamente!",
+        "id": proximoId,
+        "titulo": novoTitulo,
+        "imagem_url": imagemFinal, // USA A URL FORNECIDA PELO USUÁRIO OU A PADRÃO
+        "descricao_curta": novoConteudo.substring(0, 80) + '...',
+        "conteudo_completo": novoConteudo,
         "data_publicacao": new Date().toISOString().split('T')[0]
     };
 
     feedNoticias.push(novaNoticia); // Adiciona ao final do Array
     alert(`Notícia com ID ${novaNoticia.id} adicionada!`);
+    
+    // Limpa os campos após a adição
+    document.getElementById('input-titulo').value = '';
+    document.getElementById('input-conteudo').value = '';
+    document.getElementById('input-imagem-url').value = ''; // Limpa o novo campo
+
     atualizarBotoes();
     atualizarListaFeed();
+    
 }
 
-// **4. Remover notícia por ID**
+// Remover notícia por ID
 function removerNoticia() {
     const idParaRemover = parseInt(document.getElementById('input-remover-id').value);
 
