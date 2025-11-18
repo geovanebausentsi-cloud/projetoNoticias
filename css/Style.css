@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* ================================================= */
+/* 1. RESET E LAYOUT BÁSICO (Seu Código Original) */
+/* ================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Noto Serif", serif;
+}
+
+body {
+    background-color: black;
+    font-size: 16px; /* Ajustado para um valor padrão razoável, pois 60px é muito grande */
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    min-height: 60px;
+}
+
+.logo-group {
+    display: flex;
+    align-items: center;
+}
+
+.logoBrain {
+    height: 40px;
+    margin-right: 5px;
+}
+
+.header a {
+    text-decoration: none;
+    color: rgb(4, 3, 3);
+    font-size: 18px;
+    font-weight: 500;
+    padding: 0 15px;
+}
+
+.header a:hover {
+    color: rgb(252, 25, 25);
+}
+
+.links-navegacao {
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+}
+
+.main {
+    background-color: rgb(0, 115, 67);
+    flex-grow: 20;
+    padding: 20px; /* Adicionado padding para o conteúdo principal */
+}
+
+.main .titulo-principal {
+    font-size: 45px;
+    font-weight: 700;
+    color: #CC0000;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding: 5px 5px 0px 5px;
+}
+
+.main .paragrafo1 {
+    font-size: 25px;
+    font-weight: 300;
+    color: #f7f7f7;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding: 5px 5px 0px 5px;
+}
+
+.main .conteiner1 {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.footer {
+    background-color: rgb(229, 217, 217);
+    flex-grow: 1;
+    padding: 10px 20px;
+}
+
+/* ================================================= */
+/* 2. ESTILOS DE CONTROLES E NAVEGAÇÃO (Novo) */
+/* ================================================= */
+
+.main .conteiner2 {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7; 
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.controles-navegacao,
+.controles-gerenciamento {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.controles-navegacao button,
+.controles-gerenciamento button {
+    padding: 10px 15px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: opacity 0.3s;
+}
+
+/* Cores específicas para os grupos de botões */
+.controles-navegacao button {
+    background-color: #CC0000; /* Vermelho vibrante (cor principal) */
+}
+#btn-voltar-historico {
+    background-color: #FF7F50; /* Laranja para o Voltar (Pilha) */
+}
+.controles-navegacao button:hover:not(:disabled) {
+    opacity: 0.8;
+}
+
+.controles-gerenciamento button {
+    background-color: rgb(0, 115, 67); /* Verde escuro (cor principal) */
+}
+.controles-gerenciamento button:hover {
+    opacity: 0.8;
+}
+
+.controles-navegacao button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.controles-gerenciamento input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 150px;
+    font-size: 16px;
+}
+
+.lista-feed-atual h3 {
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #333;
+}
+#feed-ids {
+    display: block;
+    word-wrap: break-word;
+    font-size: 14px;
+    color: #666;
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* ================================================= */
+/* 3. ESTILOS DA NOTÍCIA ATUAL (Ajustado do seu código) */
+/* ================================================= */
+
+/* Corresponde ao .noticia-principal gerado pelo JS */
+.noticia-principal {
+    margin-top: 20px;
+    border-radius: 8px;
+    background-color: #ffffff; /* Fundo branco para o cartão */
+    overflow: hidden;
+    /* Remove a sombra do container para a sombra ficar no card-noticia */
+}
+
+/* Corresponde ao .card-noticia gerado pelo JS */
+.card-noticia {
+    display: flex;
+    flex-direction: column; /* Padrão vertical (mobile first) */
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+}
+
+/* Imagem e Conteúdo (Adaptado do seu CSS) */
+.imagem-noticia {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Contêiner do texto da notícia, agora chamado .conteudo-card no JS */
+.conteudo-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.conteudo-card h2 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #212529; 
+    margin-bottom: 5px;
+}
+
+.descricao-curta {
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 400;
+    color: #6c757d;
+}
+
+.conteudo-completo {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #333;
+}
+
+.data-publicacao {
+    display: block;
+    font-size: 14px;
+    color: #999;
+    text-align: right;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e9ecef;
+}
+
+/* --- Media Query para Desktop (Adaptação) --- */
+@media (min-width: 768px) {
+    /* O cartão de notícia única não precisa de flex-direction: row, 
+       mas se você quisesse a imagem na lateral, esta seria a lógica: 
+    .card-noticia {
+        flex-direction: row; 
+    }
+    .imagem-noticia {
+        width: 300px; 
+        max-height: none;
+    }
+    */
+    
+    .conteudo-card h2 {
+        font-size: 28px;
+    }
+
+    .controles-navegacao {
+        justify-content: flex-start;
+    }
+
+    .controles-gerenciamento {
+        justify-content: flex-start;
+    }
+}
