@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* ================================================= */
-/* 1. RESET E LAYOUT BÁSICO (Seu Código Original) */
+/* 1. RESET E LAYOUT BÁSICO */
 /* ================================================= */
 * {
     margin: 0;
@@ -12,7 +12,7 @@
 
 body {
     background-color: black;
-    font-size: 16px; /* Ajustado para um valor padrão razoável, pois 60px é muito grande */
+    font-size: 16px;
     width: 100vw;
     min-height: 100vh;
     display: flex;
@@ -44,6 +44,7 @@ body {
     font-size: 18px;
     font-weight: 500;
     padding: 0 15px;
+    transition: color 0.3s;
 }
 
 .header a:hover {
@@ -52,224 +53,213 @@ body {
 
 .links-navegacao {
     display: flex;
-    gap: 3px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
+/* ================================================= */
+/* 2. MAIN CONTENT */
+/* ================================================= */
 .main {
     background-color: rgb(0, 115, 67);
-    flex-grow: 20;
-    padding: 20px; /* Adicionado padding para o conteúdo principal */
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.main .titulo-principal {
-    font-size: 45px;
+.conteiner1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.titulo-principal {
+    font-size: 2.5rem;
     font-weight: 700;
     color: #CC0000;
     text-transform: uppercase;
+    text-align: center;
     margin-bottom: 10px;
-    padding: 5px 5px 0px 5px;
 }
 
-.main .paragrafo1 {
-    font-size: 25px;
+.paragrafo1 {
+    font-size: 1.5rem;
     font-weight: 300;
     color: #f7f7f7;
     text-transform: uppercase;
-    margin-bottom: 10px;
-    padding: 5px 5px 0px 5px;
-}
-
-.main .conteiner1 {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-
-.footer {
-    background-color: rgb(229, 217, 217);
-    flex-grow: 1;
-    padding: 10px 20px;
+    text-align: center;
 }
 
 /* ================================================= */
-/* 2. ESTILOS DE CONTROLES E NAVEGAÇÃO (Novo) */
+/* 3. NOTÍCIAS CARD */
 /* ================================================= */
-
-.main .conteiner2 {
+.conteiner2 {
+    width: 100%;
     max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f7f7f7; 
+    background-color: #f7f7f7;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
-.controles-navegacao,
-.controles-gerenciamento {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0;
-}
-
-.controles-navegacao button,
-.controles-gerenciamento button {
-    padding: 10px 15px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: opacity 0.3s;
-}
-
-/* Cores específicas para os grupos de botões */
-.controles-navegacao button {
-    background-color: #CC0000; /* Vermelho vibrante (cor principal) */
-}
-#btn-voltar-historico {
-    background-color: #FF7F50; /* Laranja para o Voltar (Pilha) */
-}
-.controles-navegacao button:hover:not(:disabled) {
-    opacity: 0.8;
-}
-
-.controles-gerenciamento button {
-    background-color: rgb(0, 115, 67); /* Verde escuro (cor principal) */
-}
-.controles-gerenciamento button:hover {
-    opacity: 0.8;
-}
-
-.controles-navegacao button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-    opacity: 1;
-}
-
-.controles-gerenciamento input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 150px;
-    font-size: 16px;
-}
-
-.lista-feed-atual h3 {
-    margin-bottom: 5px;
-    font-size: 18px;
-    color: #333;
-}
-#feed-ids {
-    display: block;
-    word-wrap: break-word;
-    font-size: 14px;
-    color: #666;
-    background-color: #eee;
-    padding: 10px;
-    border-radius: 4px;
-}
-
-/* ================================================= */
-/* 3. ESTILOS DA NOTÍCIA ATUAL (Ajustado do seu código) */
-/* ================================================= */
-
-/* Corresponde ao .noticia-principal gerado pelo JS */
 .noticia-principal {
     margin-top: 20px;
     border-radius: 8px;
-    background-color: #ffffff; /* Fundo branco para o cartão */
+    background-color: #ffffff;
     overflow: hidden;
-    /* Remove a sombra do container para a sombra ficar no card-noticia */
 }
 
-/* Corresponde ao .card-noticia gerado pelo JS */
 .card-noticia {
     display: flex;
-    flex-direction: column; /* Padrão vertical (mobile first) */
+    flex-direction: column;
     text-decoration: none;
     color: inherit;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Imagem e Conteúdo (Adaptado do seu CSS) */
+.card-noticia:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
 .imagem-noticia {
     width: 100%;
     height: auto;
     max-height: 400px;
     object-fit: cover;
-    display: block;
 }
 
-/* Contêiner do texto da notícia, agora chamado .conteudo-card no JS */
 .conteudo-card {
-    padding: 20px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .conteudo-card h2 {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 700;
-    line-height: 1.3;
-    color: #212529; 
-    margin-bottom: 5px;
+    color: #212529;
 }
 
 .descricao-curta {
     font-style: italic;
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 0.9rem;
     color: #6c757d;
 }
 
 .conteudo-completo {
-    line-height: 1.6;
-    margin-bottom: 15px;
-    font-size: 18px;
+    font-size: 1rem;
     color: #333;
+    line-height: 1.5;
 }
 
 .data-publicacao {
-    display: block;
-    font-size: 14px;
+    font-size: 0.8rem;
     color: #999;
     text-align: right;
-    margin-top: 10px;
-    padding-top: 10px;
+    padding-top: 5px;
     border-top: 1px solid #e9ecef;
 }
 
-/* --- Media Query para Desktop (Adaptação) --- */
-@media (min-width: 768px) {
-    /* O cartão de notícia única não precisa de flex-direction: row, 
-       mas se você quisesse a imagem na lateral, esta seria a lógica: 
-    .card-noticia {
-        flex-direction: row; 
+//* ================================================= */
+/* BOTÕES PEQUENOS, SUTIS E ALINHADOS À DIREITA */
+/* ================================================= */
+.botoes-navegacao {
+    display: flex;
+    justify-content: flex-end; /* alinha à direita */
+    gap: 6px;                  /* espaço pequeno entre os botões */
+    margin-top: 10px;          /* distancia do card da notícia */
+}
+
+.botoes-navegacao button {
+    margin-top: 20px;
+    padding: 4px 10px;       
+    font-size: 0.75rem;      
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;   
+    min-width: auto;
+    transition: all 0.2s ease;
+}
+
+.botoes-navegacao button:hover {
+    opacity: 0.85;
+}
+
+#btnAnterior, #btnProximo {
+    background-color: #CC0000;
+    color: white;
+}
+
+#btnVoltar {
+    background-color: #FF7F50;
+    color: white;
+}
+
+.botoes-navegacao button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .botoes-navegacao button {
+        font-size: 0.7rem;
+        padding: 3px 8px;
     }
-    .imagem-noticia {
-        width: 300px; 
-        max-height: none;
+}
+
+@media (max-width: 480px) {
+    .botoes-navegacao {
+        justify-content: center; /* em telas muito pequenas, centraliza */
     }
-    */
-    
+    .botoes-navegacao button {
+        font-size: 0.65rem;
+        padding: 3px 6px;
+    }
+}
+
+/* ================================================= */
+/* 5. RESPONSIVIDADE */
+/* ================================================= */
+@media (max-width: 768px) {
+    .titulo-principal {
+        font-size: 2rem;
+    }
+    .paragrafo1 {
+        font-size: 1.2rem;
+    }
     .conteudo-card h2 {
-        font-size: 28px;
+        font-size: 1.3rem;
     }
-
-    .controles-navegacao {
-        justify-content: flex-start;
+    .card-noticia {
+        font-size: 0.9rem;
     }
+    button {
+        font-size: 0.8rem;
+        padding: 4px 8px;
+    }
+}
 
-    .controles-gerenciamento {
-        justify-content: flex-start;
+@media (max-width: 480px) {
+    .titulo-principal {
+        font-size: 1.5rem;
+    }
+    .paragrafo1 {
+        font-size: 1rem;
+    }
+    .conteudo-card h2 {
+        font-size: 1.1rem;
+    }
+    button {
+        font-size: 0.75rem;
+        padding: 3px 6px;
     }
 }
