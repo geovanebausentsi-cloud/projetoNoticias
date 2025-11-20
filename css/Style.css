@@ -1,17 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap'); /* Adicionei uma fonte Sans para UI */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
 /* ================================================= */
-/* 1. RESET E VARIAVEIS GLOBAIS */
+/* 1. VARIAVEIS GLOBAIS E RESET */
 /* ================================================= */
 :root {
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: 1px solid rgba(255, 255, 255, 0.2);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    --primary-color: #ff3b30; /* Vermelho Apple mais moderno */
-    --accent-color: #ff9500;  /* Laranja Apple */
+    --primary-color: #ff3b30;
+    --accent-color: #ff9500;
     --text-light: #f5f5f7;
     --text-dark: #1d1d1f;
+    --bg-dark-gradient: radial-gradient(circle at top left, #002e1f, #000000);
+    
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border-color: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    
+    --border-radius-large: 24px;
+    --border-radius-medium: 16px;
+    --border-radius-small: 8px;
+
+    --font-family-heading: "Noto Serif", serif;
+    --font-family-body: "Inter", sans-serif;
 }
 
 * {
@@ -21,125 +30,119 @@
 }
 
 body {
-    /* Fundo Gradiente Profundo para destacar o vidro */
-    background: radial-gradient(circle at top left, #002e1f, #000000);
+    background: var(--bg-dark-gradient);
     color: var(--text-light);
-    font-family: "Inter", sans-serif; /* Fonte padrão para UI */
+    font-family: var(--font-family-body);
     font-size: 16px;
     width: 100vw;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 /* ================================================= */
-/* 2. HEADER (Vidro Fosco) */
+/* 2. HEADER */
 /* ================================================= */
 .header {
-    background: rgba(0, 0, 0, 0.6); /* Escuro transparente */
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: var(--glass-border);
+    border-bottom: 1px solid var(--glass-border-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 40px;
-    min-height: 70px;
+    padding: 1rem 2.5rem;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
 }
 
 .logo-group {
     display: flex;
     align-items: center;
+    gap: 0.75rem;
 }
 
 .logoBrain {
     height: 40px;
-    margin-right: 10px;
-    filter: invert(1); /* Inverte para branco se o logo for preto */
+    filter: invert(1);
 }
 
 .header a {
     text-decoration: none;
     color: var(--text-light);
-    font-size: 1.2rem;
-    font-weight: 600;
-    padding: 8px 16px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
     border-radius: 20px;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .header a:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--glass-bg);
     color: var(--primary-color);
 }
 
 .links-navegacao {
     display: flex;
-    gap: 15px;
+    gap: 1rem;
 }
 
 /* ================================================= */
-/* 3. MAIN CONTENT */
+/* 3. CONTEÚDO PRINCIPAL */
 /* ================================================= */
 .main {
-    padding: 40px 20px;
+    padding: 2.5rem 1.25rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: transparent; /* Removemos a cor sólida verde */
+    width: 100%;
 }
 
 .conteiner1 {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem;
     max-width: 800px;
 }
 
 .titulo-principal {
-    font-family: "Noto Serif", serif; /* Mantemos Serif apenas para títulos */
+    font-family: var(--font-family-heading);
     font-size: 3rem;
     font-weight: 800;
-    background: linear-gradient(90deg, #ff3b30, #ff9500);
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
     text-transform: uppercase;
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
     letter-spacing: -1px;
 }
 
 .paragrafo1 {
-    font-family: "Inter", sans-serif;
     font-size: 1.2rem;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.8);
-    letter-spacing: 1px;
 }
 
 /* ================================================= */
-/* 4. CARTÃO DA NOTÍCIA (Efeito Glassmorphism) */
+/* 4. CARD DE NOTÍCIA */
 /* ================================================= */
 .conteiner2 {
     width: 100%;
     max-width: 900px;
-    /* Removemos background sólido daqui, pois o card-noticia terá o efeito */
     background: transparent;
-    box-shadow: none;
-    padding: 0;
 }
 
-/* Este estilo é aplicado na div gerada pelo JS */
 .card-noticia {
-    background: rgba(255, 255, 255, 0.05); /* Vidro escuro */
+    background: var(--glass-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: var(--glass-border);
-    border-radius: 24px;
-    padding: 30px;
+    border: 1px solid var(--glass-border-color);
+    border-radius: var(--border-radius-large);
+    padding: 2rem;
     box-shadow: var(--glass-shadow);
-    color: white;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    margin-bottom: 2.5rem;
 }
 
 .card-noticia:hover {
@@ -148,17 +151,15 @@ body {
 }
 
 .card-noticia h2 {
-    font-family: "Noto Serif", serif;
+    font-family: var(--font-family-heading);
     font-size: 2rem;
-    margin-bottom: 20px;
-    color: #fff;
+    margin-bottom: 1.5rem;
 }
 
-/* Imagem dentro do card */
 .card-noticia img {
-    border-radius: 16px;
+    border-radius: var(--border-radius-medium);
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -166,139 +167,154 @@ body {
 
 .card-noticia p {
     font-size: 1.1rem;
-    line-height: 1.6;
+    line-height: 1.7;
     color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
 }
 
 .card-noticia small {
     display: block;
-    margin-top: 20px;
+    margin-top: 1.5rem;
     color: rgba(255, 255, 255, 0.5);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 10px;
+    padding-top: 0.75rem;
+    font-size: 0.9rem;
 }
 
 /* ================================================= */
-/* 5. BOTÕES DE NAVEGAÇÃO (Estilo iOS) */
+/* 5. NAVEGAÇÃO E PAINEL ADMIN */
 /* ================================================= */
 .botoes-navegacao {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
-    margin-top: 30px;
-    margin-bottom: 40px;
+    gap: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 900px;
 }
 
 .botoes-navegacao button {
-    padding: 8px 16px; /* Reduzido */
-    font-size: 0.8rem; /* Reduzido */
-    font-weight: 500; /* Mais suave */
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.5px; /* Menos espaçamento */
-    border-radius: 20px; /* Mantido */
+    letter-spacing: 0.5px;
+    border-radius: 20px;
     border: 1px solid rgba(255,255,255,0.1);
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* Sombra mais sutil */
-}
-
-#btnAnterior, #btnProximo {
-    background: rgba(255, 255, 255, 0.1); /* Cor neutra */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    background: rgba(255, 255, 255, 0.1);
     color: white;
 }
 
-#btnAnterior:hover, #btnProximo:hover {
+.botoes-navegacao button:hover {
     background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Brilho suave */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-#btnVoltar {
-    background: rgba(255, 255, 255, 0.1); /* Cor neutra */
-    color: white;
-}
-
-#btnVoltar:hover {
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Brilho suave */
-}
-
-/* ================================================= */
-/* 6. PAINEL ADMINISTRATIVO (Novo Estilo Glass) */
-/* ================================================= */
 .painel-admin {
-    background: rgba(255, 255, 255, 0.03) !important; /* Sobrescreve o inline style se houver */
+    background: var(--glass-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: var(--glass-border);
-    border-radius: 20px !important;
-    padding: 30px !important;
-    margin-top: 40px;
+    border: 1px solid var(--glass-border-color);
+    border-radius: var(--border-radius-large);
+    padding: 2rem;
     box-shadow: var(--glass-shadow);
     width: 100%;
-    max-width: 900px;
-    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .painel-admin h3 {
-    margin-bottom: 20px;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 1.5rem;
     border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 10px;
+    padding-bottom: 0.75rem;
 }
 
-/* Inputs bonitos */
-.painel-admin input {
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.painel-admin input, .painel-admin textarea {
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    padding: 10px 15px;
+    border-radius: var(--border-radius-small);
+    padding: 0.75rem 1rem;
     color: white;
     font-size: 1rem;
-    margin-right: 10px;
+    font-family: var(--font-family-body);
     outline: none;
-    transition: border 0.3s;
+    transition: all 0.3s ease;
+    width: 100%;
 }
 
-.painel-admin input:focus {
+.painel-admin input::placeholder, .painel-admin textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.painel-admin input:focus, .painel-admin textarea:focus {
     border-color: var(--primary-color);
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
 }
 
-/* Botões do admin */
 .painel-admin button {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--primary-color);
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 8px 16px; /* Reduzido */
-    font-size: 0.8rem; /* Reduzido */
-    border-radius: 8px;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: var(--border-radius-small);
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    align-self: flex-start; /* Alinha o botão à esquerda */
 }
 
 .painel-admin button:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--accent-color);
+    box-shadow: 0 0 15px rgba(255, 149, 0, 0.4);
+    transform: translateY(-2px);
 }
 
 /* ================================================= */
-/* 7. FOOTER */
+/* 6. FOOTER */
 /* ================================================= */
 .footer {
     background: rgba(0, 0, 0, 0.8);
     color: rgba(255, 255, 255, 0.4);
     text-align: center;
-    padding: 20px;
+    padding: 1.25rem;
     font-size: 0.8rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
 }
 
-/* RESPONSIVIDADE */
+/* ================================================= */
+/* 7. RESPONSIVIDADE */
+/* ================================================= */
 @media (max-width: 768px) {
-    .titulo-principal { font-size: 2rem; }
-    .header { padding: 10px 20px; }
-    .card-noticia { padding: 20px; }
-    .painel-admin input { width: 100%; margin-bottom: 10px; }
+    .header {
+        padding: 1rem 1.25rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .titulo-principal { font-size: 2.2rem; }
+    .card-noticia { padding: 1.5rem; }
+    
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .painel-admin button {
+        width: 100%;
+    }
 }

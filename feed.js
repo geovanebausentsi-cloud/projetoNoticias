@@ -15,6 +15,8 @@ const btnAdicionar = document.getElementById("btnAdicionar");
 const btnRemover = document.getElementById("btnRemover");
 const inputTitulo = document.getElementById("novoTitulo");
 const inputDescricao = document.getElementById("novaDescricao");
+const inputDescricaoCompleta = document.getElementById("novaDescricaoCompleta");
+const inputImagemUrl = document.getElementById("novaImagemUrl"); // <-- NOVO
 const inputIdRemover = document.getElementById("idRemover");
 
 // INSTANCIAR MVC
@@ -32,12 +34,18 @@ btnAnterior.addEventListener("click", () => controller.anterior());
 btnVoltar.addEventListener("click", () => controller.voltar());
 
 // LIGAR BOTÕES DE ADMINISTRAÇÃO (CRUD)
-btnAdicionar.addEventListener("click", () => {
-    controller.adicionarNoticia(inputTitulo.value, inputDescricao.value);
-    // Limpar campos
-    inputTitulo.value = "";
-    inputDescricao.value = "";
-});
+if (btnAdicionar && inputTitulo && inputDescricao && inputImagemUrl && inputDescricaoCompleta) {
+    btnAdicionar.addEventListener("click", () => {
+        controller.adicionarNoticia(inputTitulo.value, inputDescricao.value, inputImagemUrl.value, inputDescricaoCompleta.value);
+        // Limpar campos
+        inputTitulo.value = "";
+        inputDescricao.value = "";
+        inputImagemUrl.value = "";
+        inputDescricaoCompleta.value = "";
+    });
+} else {
+    console.error("Um ou mais elementos do formulário de adição não foram encontrados. Verifique os IDs no HTML.");
+}
 
 btnRemover.addEventListener("click", () => {
     controller.removerNoticia(parseInt(inputIdRemover.value));

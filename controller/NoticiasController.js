@@ -3,7 +3,7 @@ import { Noticia } from "../model/Noticia.js"; // Importe a classe Noticia
 export class NoticiasController {
     constructor(feed, navegacao, view) {
         this.feed = feed;
-        this.navegacao = navegacao;
+        this.nav = navegacao;
         this.view = view;
     }
 
@@ -12,35 +12,35 @@ export class NoticiasController {
     }
 
     proximo() {
-        const atual = this.navegacao.proximo();
+        const atual = this.nav.proximo();
         this.view.render(atual);
     }
 
     anterior() {
-        const atual = this.navegacao.anterior();
+        const atual = this.nav.anterior();
         this.view.render(atual);
     }
 
     voltar() {
-        const atual = this.navegacao.voltarPilha();
+        const atual = this.nav.voltarPilha();
         this.view.render(atual);
     }
 
     // --- NOVAS FUNCIONALIDADES (Requisitos 11, 12, 24, 25) ---
 
-    adicionarNoticia(titulo, descricao) {
+    adicionarNoticia(titulo, descricao, imagemUrl, conteudoCompleto) {
         if (!titulo || !descricao) {
             alert("Preencha título e descrição!");
             return;
         }
-
+        
         // Cria objeto Noticia (imagem genérica para teste)
         const nova = new Noticia(
             0, // ID será gerado no feed
             titulo, 
-            "https://via.placeholder.com/300", // Imagem placeholder
+            imagemUrl || "https://via.placeholder.com/300", // Usa a URL fornecida ou um placeholder
             descricao, 
-            "Conteúdo completo gerado automaticamente...", 
+            conteudoCompleto, 
             new Date().toISOString().split('T')[0]
         );
 
@@ -48,7 +48,7 @@ export class NoticiasController {
         alert("Notícia adicionada com sucesso!");
         
         // Opcional: Ir para a nova notícia
-        // this.navegacao.indice = this.feed.noticias.length - 1;
+        // this.nav.indice = this.feed.noticias.length - 1;
         // this.atualizarTela();
     }
 
@@ -61,10 +61,10 @@ export class NoticiasController {
             alert(`Notícia ${id} removida.`);
             
             // 1. CHAMAMOS O NOVO MÉTODO DE AJUSTE
-            this.navegacao.ajustarHistorico(indiceRemovido); 
+            this.nav.ajustarHistorico(indiceRemovido); 
             
             // 2. Revalida a navegação e atualiza a tela
-            const atual = this.navegacao.verificarLimites();
+            const atual = this.nav.verificarLimites();
             this.view.render(atual);
         } else {
             alert("ID não encontrado.");
@@ -72,7 +72,7 @@ export class NoticiasController {
     }
 
     atualizarTela() {
-        const atual = this.navegacao.obterAtual();
+        const atual = this.nav.obterAtual();
         this.view.render(atual);
     }
 }

@@ -23,6 +23,7 @@ export class NoticiasView {
                 <img src="${noticia.imagem_url}" style="width: 100%; max-height: 300px; object-fit: cover; margin-top: 10px; border-radius: 4px;">
                 
                 <p style="margin-top: 10px;">${noticia.descricao_curta}</p>
+                <p style="margin-top: 10px;">${noticia.conteudo_completo}</p>
                 <p><small>Publicado em: ${noticia.data_publicacao}</small></p>
             </div>
         `;
