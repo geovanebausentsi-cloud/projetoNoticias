@@ -1,31 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap'); /* Adicionei uma fonte Sans para UI */
 
 /* ================================================= */
-/* 1. RESET E LAYOUT BÁSICO */
+/* 1. RESET E VARIAVEIS GLOBAIS */
 /* ================================================= */
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --primary-color: #ff3b30; /* Vermelho Apple mais moderno */
+    --accent-color: #ff9500;  /* Laranja Apple */
+    --text-light: #f5f5f7;
+    --text-dark: #1d1d1f;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Noto Serif", serif;
 }
 
 body {
-    background-color: black;
+    /* Fundo Gradiente Profundo para destacar o vidro */
+    background: radial-gradient(circle at top left, #002e1f, #000000);
+    color: var(--text-light);
+    font-family: "Inter", sans-serif; /* Fonte padrão para UI */
     font-size: 16px;
     width: 100vw;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
+/* ================================================= */
+/* 2. HEADER (Vidro Fosco) */
+/* ================================================= */
 .header {
-    background-color: #f0f0f0;
+    background: rgba(0, 0, 0, 0.6); /* Escuro transparente */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: var(--glass-border);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    min-height: 60px;
+    padding: 15px 40px;
+    min-height: 70px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .logo-group {
@@ -35,231 +56,249 @@ body {
 
 .logoBrain {
     height: 40px;
-    margin-right: 5px;
+    margin-right: 10px;
+    filter: invert(1); /* Inverte para branco se o logo for preto */
 }
 
 .header a {
     text-decoration: none;
-    color: rgb(4, 3, 3);
-    font-size: 18px;
-    font-weight: 500;
-    padding: 0 15px;
-    transition: color 0.3s;
+    color: var(--text-light);
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
 }
 
 .header a:hover {
-    color: rgb(252, 25, 25);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--primary-color);
 }
 
 .links-navegacao {
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    gap: 15px;
 }
 
 /* ================================================= */
-/* 2. MAIN CONTENT */
+/* 3. MAIN CONTENT */
 /* ================================================= */
 .main {
-    background-color: rgb(0, 115, 67);
-    flex-grow: 1;
-    padding: 20px;
+    padding: 40px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: transparent; /* Removemos a cor sólida verde */
 }
 
 .conteiner1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 800px;
 }
 
 .titulo-principal {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #CC0000;
+    font-family: "Noto Serif", serif; /* Mantemos Serif apenas para títulos */
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ff3b30, #ff9500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
 }
 
 .paragrafo1 {
-    font-size: 1.5rem;
+    font-family: "Inter", sans-serif;
+    font-size: 1.2rem;
     font-weight: 300;
-    color: #f7f7f7;
-    text-transform: uppercase;
-    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 1px;
 }
 
 /* ================================================= */
-/* 3. NOTÍCIAS CARD */
+/* 4. CARTÃO DA NOTÍCIA (Efeito Glassmorphism) */
 /* ================================================= */
 .conteiner2 {
     width: 100%;
-    max-width: 1000px;
-    background-color: #f7f7f7;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    max-width: 900px;
+    /* Removemos background sólido daqui, pois o card-noticia terá o efeito */
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
 }
 
-.noticia-principal {
-    margin-top: 20px;
-    border-radius: 8px;
-    background-color: #ffffff;
-    overflow: hidden;
-}
-
+/* Este estilo é aplicado na div gerada pelo JS */
 .card-noticia {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: inherit;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.05); /* Vidro escuro */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: var(--glass-border);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: var(--glass-shadow);
+    color: white;
+    transition: transform 0.3s ease;
 }
 
 .card-noticia:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
-.imagem-noticia {
+.card-noticia h2 {
+    font-family: "Noto Serif", serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Imagem dentro do card */
+.card-noticia img {
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
     width: 100%;
     height: auto;
-    max-height: 400px;
     object-fit: cover;
 }
 
-.conteudo-card {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.card-noticia p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 15px;
 }
 
-.conteudo-card h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #212529;
+.card-noticia small {
+    display: block;
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 10px;
 }
 
-.descricao-curta {
-    font-style: italic;
-    font-size: 0.9rem;
-    color: #6c757d;
-}
-
-.conteudo-completo {
-    font-size: 1rem;
-    color: #333;
-    line-height: 1.5;
-}
-
-.data-publicacao {
-    font-size: 0.8rem;
-    color: #999;
-    text-align: right;
-    padding-top: 5px;
-    border-top: 1px solid #e9ecef;
-}
-
-//* ================================================= */
-/* BOTÕES PEQUENOS, SUTIS E ALINHADOS À DIREITA */
+/* ================================================= */
+/* 5. BOTÕES DE NAVEGAÇÃO (Estilo iOS) */
 /* ================================================= */
 .botoes-navegacao {
     display: flex;
-    justify-content: flex-end; /* alinha à direita */
-    gap: 6px;                  /* espaço pequeno entre os botões */
-    margin-top: 10px;          /* distancia do card da notícia */
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    margin-bottom: 40px;
 }
 
 .botoes-navegacao button {
-    margin-top: 20px;
-    padding: 4px 10px;       
-    font-size: 0.75rem;      
-    border-radius: 4px;
-    border: none;
+    padding: 8px 16px; /* Reduzido */
+    font-size: 0.8rem; /* Reduzido */
+    font-weight: 500; /* Mais suave */
+    text-transform: uppercase;
+    letter-spacing: 0.5px; /* Menos espaçamento */
+    border-radius: 20px; /* Mantido */
+    border: 1px solid rgba(255,255,255,0.1);
     cursor: pointer;
-    display: inline-block;   
-    min-width: auto;
-    transition: all 0.2s ease;
-}
-
-.botoes-navegacao button:hover {
-    opacity: 0.85;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* Sombra mais sutil */
 }
 
 #btnAnterior, #btnProximo {
-    background-color: #CC0000;
+    background: rgba(255, 255, 255, 0.1); /* Cor neutra */
     color: white;
+}
+
+#btnAnterior:hover, #btnProximo:hover {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Brilho suave */
 }
 
 #btnVoltar {
-    background-color: #FF7F50;
+    background: rgba(255, 255, 255, 0.1); /* Cor neutra */
     color: white;
 }
 
-.botoes-navegacao button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-    opacity: 1;
+#btnVoltar:hover {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Brilho suave */
+}
+
+/* ================================================= */
+/* 6. PAINEL ADMINISTRATIVO (Novo Estilo Glass) */
+/* ================================================= */
+.painel-admin {
+    background: rgba(255, 255, 255, 0.03) !important; /* Sobrescreve o inline style se houver */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: var(--glass-border);
+    border-radius: 20px !important;
+    padding: 30px !important;
+    margin-top: 40px;
+    box-shadow: var(--glass-shadow);
+    width: 100%;
+    max-width: 900px;
+    color: white;
+}
+
+.painel-admin h3 {
+    margin-bottom: 20px;
+    font-weight: 300;
+    font-size: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
+}
+
+/* Inputs bonitos */
+.painel-admin input {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 10px 15px;
+    color: white;
+    font-size: 1rem;
+    margin-right: 10px;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.painel-admin input:focus {
+    border-color: var(--primary-color);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Botões do admin */
+.painel-admin button {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 16px; /* Reduzido */
+    font-size: 0.8rem; /* Reduzido */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.painel-admin button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* ================================================= */
+/* 7. FOOTER */
+/* ================================================= */
+.footer {
+    background: rgba(0, 0, 0, 0.8);
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* RESPONSIVIDADE */
 @media (max-width: 768px) {
-    .botoes-navegacao button {
-        font-size: 0.7rem;
-        padding: 3px 8px;
-    }
-}
-
-@media (max-width: 480px) {
-    .botoes-navegacao {
-        justify-content: center; /* em telas muito pequenas, centraliza */
-    }
-    .botoes-navegacao button {
-        font-size: 0.65rem;
-        padding: 3px 6px;
-    }
-}
-
-/* ================================================= */
-/* 5. RESPONSIVIDADE */
-/* ================================================= */
-@media (max-width: 768px) {
-    .titulo-principal {
-        font-size: 2rem;
-    }
-    .paragrafo1 {
-        font-size: 1.2rem;
-    }
-    .conteudo-card h2 {
-        font-size: 1.3rem;
-    }
-    .card-noticia {
-        font-size: 0.9rem;
-    }
-    button {
-        font-size: 0.8rem;
-        padding: 4px 8px;
-    }
-}
-
-@media (max-width: 480px) {
-    .titulo-principal {
-        font-size: 1.5rem;
-    }
-    .paragrafo1 {
-        font-size: 1rem;
-    }
-    .conteudo-card h2 {
-        font-size: 1.1rem;
-    }
-    button {
-        font-size: 0.75rem;
-        padding: 3px 6px;
-    }
+    .titulo-principal { font-size: 2rem; }
+    .header { padding: 10px 20px; }
+    .card-noticia { padding: 20px; }
+    .painel-admin input { width: 100%; margin-bottom: 10px; }
 }

@@ -1,5 +1,5 @@
 // Importando o Model
-import { FeedNoticias } from "../model/feedNoticias.js";
+import { FeedNoticias } from "../model/FeedNoticias.js";
 import { Noticia } from "../model/Noticia.js";
 import { NOTICIAS_MOCK } from "../js/dados.js";
 

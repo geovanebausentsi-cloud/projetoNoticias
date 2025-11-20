@@ -1,4 +1,4 @@
-import { NavegacaoPilha } from "../model/Navegacao.js";
+import { Navegacao } from "../model/Navegacao.js";
 
 
 console.log("=== Teste da Navegação com Pilha ===");
@@ -7,7 +7,7 @@ console.log("=== Teste da Navegação com Pilha ===");
 const lista = ["A", "B", "C", "D"];
 
 // Criando o navegador
-const nav = new NavegacaoPilha(lista);
+const nav = new Navegacao(lista);
 
 // -----------------------------------------------------------
 // 1. Testar avanço simples

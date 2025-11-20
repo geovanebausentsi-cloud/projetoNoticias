@@ -20,7 +20,7 @@ export class FeedNoticias {
         return novaNoticia.id;
     }
 
-    removerPorId(id) {
+  removerPorId(id) {
         const indice = this.noticias.findIndex(n => n.id === id);
 
         if (indice === -1) {
@@ -29,11 +29,14 @@ export class FeedNoticias {
                         //remove
         this.noticias.splice(indice, 1);
 
-        // ajusta índice atual caso necessário
+        // ajusta índice atual caso necessário - (Essa parte é redundante,
+        // mas vamos mantê-la e focar na NavegacaoPilha)
         if (this.indiceAtual >= this.noticias.length) {
             this.indiceAtual = Math.max(0, this.noticias.length - 1);
         }
-        return true;
+        
+        // Retorna o índice removido para que o Controller possa atualizar a NavegacaoPilha
+        return indice; // <-- MUDANÇA AQUI
     }
 
     // --- Métodos auxiliares ---

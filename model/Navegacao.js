@@ -1,4 +1,4 @@
-export class NavegacaoPilha {
+export class Navegacao {
     constructor(itens = []) {
         this.itens = itens;        // array genérico
         this.indice = 0;           // começa no primeiro
@@ -53,6 +53,40 @@ export class NavegacaoPilha {
     obterAtual() {
         return this.itens[this.indice] || null;
     }
+
+    // Método para corrigir o índice caso o array mude de tamanho (ex: remoção)
+    verificarLimites() {
+        if (this.itens.length === 0) {
+            this.indice = 0;
+            return null;
+        }
+        // Se o índice atual for maior que o último item, volta para o último
+        if (this.indice >= this.itens.length) {
+            this.indice = this.itens.length - 1;
+        }
+        return this.obterAtual();
+    }
+
+    // Novo método para corrigir o histórico de navegação
+    ajustarHistorico(indiceRemovido) {
+        // 1. Filtra (Remove): Garante que nenhum índice no histórico aponte para o item removido.
+        let novoHistorico = this.historico.filter(indiceSalvo => 
+            indiceSalvo !== indiceRemovido
+        );
+
+        // 2. Mapeia (Ajusta): Para todos os índices restantes, se o índice for 
+        //    maior que o removido, ele é decrementado em 1.
+        this.historico = novoHistorico.map(indiceSalvo => {
+            if (indiceSalvo > indiceRemovido) {
+                return indiceSalvo - 1;
+            }
+            return indiceSalvo; // mantém inalterado se for menor
+        });
+    }
+
+
+
+
 }
 
 
