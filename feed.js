@@ -16,7 +16,7 @@ const btnRemover = document.getElementById("btnRemover");
 const inputTitulo = document.getElementById("novoTitulo");
 const inputDescricao = document.getElementById("novaDescricao");
 const inputDescricaoCompleta = document.getElementById("novaDescricaoCompleta");
-const inputImagemUrl = document.getElementById("novaImagemUrl"); // <-- NOVO
+const inputImagemUrl = document.getElementById("novaImagemUrl"); 
 const inputIdRemover = document.getElementById("idRemover");
 
 // INSTANCIAR MVC

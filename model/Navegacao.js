@@ -4,7 +4,7 @@ export class Navegacao {
         this.indice = 0;           // começa no primeiro
         this.historico = [];       // pilha interna
     }
-
+    
     // --- funções de pilha ---
     empilhar(valor) {
         this.historico.push(valor);
@@ -67,15 +67,14 @@ export class Navegacao {
         return this.obterAtual();
     }
 
-    // Novo método para corrigir o histórico de navegação
+    //Método para corrigir o histórico de navegação
     ajustarHistorico(indiceRemovido) {
-        // 1. Filtra (Remove): Garante que nenhum índice no histórico aponte para o item removido.
-        let novoHistorico = this.historico.filter(indiceSalvo => 
+        //Filtra (Remove): Garante que nenhum índice no histórico aponte para o item removido.
+        let novoHistorico = this.historico.filter(indiceSalvo =>
             indiceSalvo !== indiceRemovido
         );
 
-        // 2. Mapeia (Ajusta): Para todos os índices restantes, se o índice for 
-        //    maior que o removido, ele é decrementado em 1.
+        // Mapeia (Ajusta): Para todos os índices restantes, se o índice for  maior que o removido, ele é decrementado em 1.
         this.historico = novoHistorico.map(indiceSalvo => {
             if (indiceSalvo > indiceRemovido) {
                 return indiceSalvo - 1;
@@ -84,13 +83,7 @@ export class Navegacao {
         });
     }
 
-
-
-
 }
-
-
-
 
 /*
 A classe NavegacaoPilha gerencia a navegação sobre um array qualquer

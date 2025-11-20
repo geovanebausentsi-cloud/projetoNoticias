@@ -119,7 +119,7 @@ body {
 }
 
 .paragrafo1 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.8);
 }
@@ -142,7 +142,7 @@ body {
     padding: 2rem;
     box-shadow: var(--glass-shadow);
     transition: transform 0.3s ease, border-color 0.3s ease;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .card-noticia:hover {
@@ -161,6 +161,7 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     margin-bottom: 1.5rem;
     width: 100%;
+    min-height: 400px;
     height: auto;
     object-fit: cover;
 }
@@ -189,7 +190,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-bottom: 2rem;
     width: 100%;
     max-width: 900px;
 }
@@ -208,10 +209,11 @@ body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     background: rgba(255, 255, 255, 0.1);
     color: white;
+    margin-bottom: 10px;
 }
 
 .botoes-navegacao button:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(234, 7, 7, 0.91);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
@@ -275,8 +277,7 @@ body {
     border-radius: var(--border-radius-small);
     cursor: pointer;
     transition: all 0.3s ease;
-    align-self: flex-start; /* Alinha o botão à esquerda */
-}
+    align-self: flex-start; 
 
 .painel-admin button:hover {
     background: var(--accent-color);
@@ -317,4 +318,5 @@ body {
     .painel-admin button {
         width: 100%;
     }
+}
 }
