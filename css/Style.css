@@ -1,275 +1,320 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
 /* ================================================= */
-/* 1. RESET E LAYOUT BÁSICO (Seu Código Original) */
+/* 1. VARIAVEIS GLOBAIS E RESET */
 /* ================================================= */
+:root {
+    --primary-color: #ff3b30;
+    --accent-color: #ff9500;
+    --text-light: #f5f5f7;
+    --text-dark: #1d1d1f;
+    --bg-dark-gradient: radial-gradient(circle at top left, #002e1f, #000000);
+    
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border-color: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    
+    --border-radius-large: 24px;
+    --border-radius-medium: 16px;
+    --border-radius-small: 8px;
+
+    --font-family-heading: "Noto Serif", serif;
+    --font-family-body: "Inter", sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Noto Serif", serif;
 }
 
 body {
-    background-color: black;
-    font-size: 16px; /* Ajustado para um valor padrão razoável, pois 60px é muito grande */
+    background: var(--bg-dark-gradient);
+    color: var(--text-light);
+    font-family: var(--font-family-body);
+    font-size: 16px;
     width: 100vw;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
+/* ================================================= */
+/* 2. HEADER */
+/* ================================================= */
 .header {
-    background-color: #f0f0f0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    min-height: 60px;
+    padding: 1rem 2.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo-group {
     display: flex;
     align-items: center;
+    gap: 0.75rem;
 }
 
 .logoBrain {
     height: 40px;
-    margin-right: 5px;
+    filter: invert(1);
 }
 
 .header a {
     text-decoration: none;
-    color: rgb(4, 3, 3);
-    font-size: 18px;
+    color: var(--text-light);
+    font-size: 1.1rem;
     font-weight: 500;
-    padding: 0 15px;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .header a:hover {
-    color: rgb(252, 25, 25);
+    background: var(--glass-bg);
+    color: var(--primary-color);
 }
 
 .links-navegacao {
     display: flex;
-    gap: 3px;
-    flex-wrap: wrap;
+    gap: 1rem;
 }
 
+/* ================================================= */
+/* 3. CONTEÚDO PRINCIPAL */
+/* ================================================= */
 .main {
-    background-color: rgb(0, 115, 67);
-    flex-grow: 20;
-    padding: 20px; /* Adicionado padding para o conteúdo principal */
-}
-
-.main .titulo-principal {
-    font-size: 45px;
-    font-weight: 700;
-    color: #CC0000;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    padding: 5px 5px 0px 5px;
-}
-
-.main .paragrafo1 {
-    font-size: 25px;
-    font-weight: 300;
-    color: #f7f7f7;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    padding: 5px 5px 0px 5px;
-}
-
-.main .conteiner1 {
-    align-items: center;
+    padding: 2.5rem 1.25rem;
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
-}
-
-.footer {
-    background-color: rgb(229, 217, 217);
-    flex-grow: 1;
-    padding: 10px 20px;
-}
-
-/* ================================================= */
-/* 2. ESTILOS DE CONTROLES E NAVEGAÇÃO (Novo) */
-/* ================================================= */
-
-.main .conteiner2 {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f7f7f7; 
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.controles-navegacao,
-.controles-gerenciamento {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
     align-items: center;
-    justify-content: center;
-    padding: 10px 0;
+    width: 100%;
 }
 
-.controles-navegacao button,
-.controles-gerenciamento button {
-    padding: 10px 15px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: opacity 0.3s;
+.conteiner1 {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    max-width: 800px;
 }
 
-/* Cores específicas para os grupos de botões */
-.controles-navegacao button {
-    background-color: #CC0000; /* Vermelho vibrante (cor principal) */
-}
-#btn-voltar-historico {
-    background-color: #FF7F50; /* Laranja para o Voltar (Pilha) */
-}
-.controles-navegacao button:hover:not(:disabled) {
-    opacity: 0.8;
-}
-
-.controles-gerenciamento button {
-    background-color: rgb(0, 115, 67); /* Verde escuro (cor principal) */
-}
-.controles-gerenciamento button:hover {
-    opacity: 0.8;
+.titulo-principal {
+    font-family: var(--font-family-heading);
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
 }
 
-.controles-navegacao button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-    opacity: 1;
-}
-
-.controles-gerenciamento input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 150px;
-    font-size: 16px;
-}
-
-.lista-feed-atual h3 {
-    margin-bottom: 5px;
-    font-size: 18px;
-    color: #333;
-}
-#feed-ids {
-    display: block;
-    word-wrap: break-word;
-    font-size: 14px;
-    color: #666;
-    background-color: #eee;
-    padding: 10px;
-    border-radius: 4px;
+.paragrafo1 {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* ================================================= */
-/* 3. ESTILOS DA NOTÍCIA ATUAL (Ajustado do seu código) */
+/* 4. CARD DE NOTÍCIA */
 /* ================================================= */
-
-/* Corresponde ao .noticia-principal gerado pelo JS */
-.noticia-principal {
-    margin-top: 20px;
-    border-radius: 8px;
-    background-color: #ffffff; /* Fundo branco para o cartão */
-    overflow: hidden;
-    /* Remove a sombra do container para a sombra ficar no card-noticia */
+.conteiner2 {
+    width: 100%;
+    max-width: 900px;
+    background: transparent;
 }
 
-/* Corresponde ao .card-noticia gerado pelo JS */
 .card-noticia {
-    display: flex;
-    flex-direction: column; /* Padrão vertical (mobile first) */
-    text-decoration: none;
-    color: inherit;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border-color);
+    border-radius: var(--border-radius-large);
+    padding: 2rem;
+    box-shadow: var(--glass-shadow);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    margin-bottom: 2.5rem;
 }
 
-/* Imagem e Conteúdo (Adaptado do seu CSS) */
-.imagem-noticia {
+.card-noticia:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.card-noticia h2 {
+    font-family: var(--font-family-heading);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-noticia img {
+    border-radius: var(--border-radius-medium);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin-bottom: 1.5rem;
     width: 100%;
     height: auto;
-    max-height: 400px;
     object-fit: cover;
-    display: block;
 }
 
-/* Contêiner do texto da notícia, agora chamado .conteudo-card no JS */
-.conteudo-card {
-    padding: 20px;
+.card-noticia p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+}
+
+.card-noticia small {
+    display: block;
+    margin-top: 1.5rem;
+    color: rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 0.75rem;
+    font-size: 0.9rem;
+}
+
+/* ================================================= */
+/* 5. NAVEGAÇÃO E PAINEL ADMIN */
+/* ================================================= */
+.botoes-navegacao {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 900px;
+}
+
+.botoes-navegacao button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.botoes-navegacao button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.painel-admin {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border-color);
+    border-radius: var(--border-radius-large);
+    padding: 2rem;
+    box-shadow: var(--glass-shadow);
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 1.5rem;
 }
 
-.conteudo-card h2 {
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 1.3;
-    color: #212529; 
-    margin-bottom: 5px;
-}
-
-.descricao-curta {
-    font-style: italic;
-    font-size: 16px;
+.painel-admin h3 {
     font-weight: 400;
-    color: #6c757d;
+    font-size: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 0.75rem;
 }
 
-.conteudo-completo {
-    line-height: 1.6;
-    margin-bottom: 15px;
-    font-size: 18px;
-    color: #333;
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.data-publicacao {
-    display: block;
-    font-size: 14px;
-    color: #999;
-    text-align: right;
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid #e9ecef;
+.painel-admin input, .painel-admin textarea {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius-small);
+    padding: 0.75rem 1rem;
+    color: white;
+    font-size: 1rem;
+    font-family: var(--font-family-body);
+    outline: none;
+    transition: all 0.3s ease;
+    width: 100%;
 }
 
-/* --- Media Query para Desktop (Adaptação) --- */
-@media (min-width: 768px) {
-    /* O cartão de notícia única não precisa de flex-direction: row, 
-       mas se você quisesse a imagem na lateral, esta seria a lógica: 
-    .card-noticia {
-        flex-direction: row; 
+.painel-admin input::placeholder, .painel-admin textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.painel-admin input:focus, .painel-admin textarea:focus {
+    border-color: var(--primary-color);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.painel-admin button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start; /* Alinha o botão à esquerda */
+}
+
+.painel-admin button:hover {
+    background: var(--accent-color);
+    box-shadow: 0 0 15px rgba(255, 149, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+/* ================================================= */
+/* 6. FOOTER */
+/* ================================================= */
+.footer {
+    background: rgba(0, 0, 0, 0.8);
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    padding: 1.25rem;
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+}
+
+/* ================================================= */
+/* 7. RESPONSIVIDADE */
+/* ================================================= */
+@media (max-width: 768px) {
+    .header {
+        padding: 1rem 1.25rem;
+        flex-direction: column;
+        gap: 1rem;
     }
-    .imagem-noticia {
-        width: 300px; 
-        max-height: none;
-    }
-    */
+    .titulo-principal { font-size: 2.2rem; }
+    .card-noticia { padding: 1.5rem; }
     
-    .conteudo-card h2 {
-        font-size: 28px;
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
     }
 
-    .controles-navegacao {
-        justify-content: flex-start;
-    }
-
-    .controles-gerenciamento {
-        justify-content: flex-start;
+    .painel-admin button {
+        width: 100%;
     }
 }
