@@ -17,9 +17,6 @@
 
         <nav class="links-navegacao">
             <a href="#">News</a>
-            <a href="#">Feed</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
         </nav>
     </div>
 
@@ -29,17 +26,34 @@
             <p class="paragrafo1">No mundo de hoje quem se informa não fica pra traz</p>
         </div>
 
-        <div class="conteiner2">
+        <div class="conteiner2" id="area-noticia"></div>
+        <div class="botoes-navegacao">
+            <button id="btnAnterior">Anterior</button>
+            <button id="btnProximo">Próximo</button>
+            <button id="btnVoltar">Voltar</button>
 
+            <div class="painel-admin">
+                <h3>Painel Administrativo</h3>
+                <div class="form-group">
+                    <input type="text" id="novoTitulo" placeholder="Título da Notícia">
+                    <input type="text" id="novaDescricao" placeholder="Descrição curta">
+                    <textarea id="novaDescricaoCompleta" placeholder="Descrição completa"></textarea>
+                    <input type="text" id="novaImagemUrl" placeholder="URL da Imagem">
+                    <button id="btnAdicionar">Adicionar Notícia</button>
+                </div>
+                <div class="form-group" style="margin-top: 10px;">
+                    <input type="number" id="idRemover" placeholder="ID para remover">
+                    <button id="btnRemover">Remover por ID</button>
+                </div>
+            </div>
         </div>
     </div>
 
-
     <div class="footer">
-        footer
+      
     </div>
-
-    <script type="module" src="/js/script.js"></script>
+    
+    <script type="module" src="../feed.js"></script>
 
 </body>
 
